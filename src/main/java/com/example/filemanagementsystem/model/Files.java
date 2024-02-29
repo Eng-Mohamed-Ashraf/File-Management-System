@@ -1,19 +1,21 @@
 package com.example.filemanagementsystem.model;
 
-//import javax.persistence.*;
 
 import jakarta.persistence.*;
 
 @Entity
-public class File {
+@Table(name = "files")
+public class Files {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Lob
-    private byte[] binaryData;
+    @Column(nullable = false)
+    private byte[] binary;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
 	public Long getId() {
@@ -24,12 +26,12 @@ public class File {
 		this.id = id;
 	}
 
-	public byte[] getBinaryData() {
-		return binaryData;
+	public byte[] getBinary() {
+		return binary;
 	}
 
-	public void setBinaryData(byte[] binaryData) {
-		this.binaryData = binaryData;
+	public void setBinary(byte[] binary) {
+		this.binary = binary;
 	}
 
 	public Item getItem() {
@@ -39,4 +41,5 @@ public class File {
 	public void setItem(Item item) {
 		this.item = item;
 	}
+
 }

@@ -1,18 +1,24 @@
 package com.example.filemanagementsystem.model;
 
+
+
 import jakarta.persistence.*;
 
 @Entity
-public class Permission {
+@Table(name = "permissions")
+public class Permissions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String userEmail;
 
+    @Column(nullable = false)
     private String permissionLevel;
 
     @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
     private PermissionGroup group;
 
 	public Long getId() {
@@ -46,4 +52,5 @@ public class Permission {
 	public void setGroup(PermissionGroup group) {
 		this.group = group;
 	}
+
 }
